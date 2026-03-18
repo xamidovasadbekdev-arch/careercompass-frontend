@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
-  const [menuOpen, setMenuOpen] = useState(false);
 
   const isLoggedIn = !!localStorage.getItem('access_token');
 
@@ -14,7 +13,6 @@ function Navbar() {
     navigate('/');
   };
 
-  // Landing sahifasida boshqacha navbar
   const isLanding = location.pathname === '/';
 
   return (
@@ -30,7 +28,6 @@ function Navbar() {
       background: 'rgba(15,12,41,0.95)',
       backdropFilter: 'blur(10px)',
     }}>
-      {/* Logo */}
       <h2
         className="gradient-text"
         style={{ fontSize: '22px', fontWeight: '800', cursor: 'pointer' }}
@@ -38,7 +35,6 @@ function Navbar() {
         CareerCompass
       </h2>
 
-      {/* Desktop menu */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
         {isLoggedIn ? (
           <>
