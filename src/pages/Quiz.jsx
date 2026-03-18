@@ -46,6 +46,7 @@ function Quiz() {
   };
 
   if (loading) return <div style={{ textAlign: 'center', padding: '100px', fontSize: '24px' }}>Yuklanmoqda... ⏳</div>;
+  if (questions.length === 0) return <div style={{ textAlign: 'center', padding: '100px', fontSize: '24px' }}>Savollar topilmadi! 😕</div>;
 
   const progress = ((current + 1) / questions.length) * 100;
   const question = questions[current];
