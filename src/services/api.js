@@ -1,7 +1,9 @@
 import axios from 'axios';
 
+const BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000/api';
+
 const API = axios.create({
-  baseURL: 'http://localhost:8000/api',
+  baseURL: BASE_URL,
 });
 
 API.interceptors.request.use((config) => {
@@ -12,7 +14,6 @@ API.interceptors.request.use((config) => {
   return config;
 });
 
-// Token muddati tugasa refresh qiladi
 API.interceptors.response.use(
   response => response,
   async (error) => {
@@ -20,7 +21,7 @@ API.interceptors.response.use(
       const refresh = localStorage.getItem('refresh_token');
       if (refresh) {
         try {
-          const res = await axios.post('http://localhost:8000/api/auth/refresh/', { refresh });
+          const res = await axios.post(`${process.env.REACT_APP_API_URL || 'http://localhost:8000/api'}/auth/refresh/`, { refresh });
           localStorage.setItem('access_token', res.data.access);
           error.config.headers.Authorization = `Bearer ${res.data.access}`;
           return axios(error.config);
